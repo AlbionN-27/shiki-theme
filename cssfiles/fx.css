@@ -4,25 +4,19 @@
 
 /* --- Keyframes --- */
 
-/* Пульсирующее неоновое свечение (тёплый амбер + фиолетовый — под закатный фон) */
+/* Зелёный неон (цвет прогресс-бара аниме) */
 @keyframes avatar-neon {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(255, 165, 50, 0.5),
-                0 0 20px rgba(255, 120, 30, 0.3),
-                0 0 40px rgba(180, 100, 255, 0.2),
-                0 0 60px rgba(255, 165, 50, 0.1);
+    box-shadow: 0 0 8px rgba(69, 146, 76, 0.5),
+                0 0 20px rgba(69, 146, 76, 0.3),
+                0 0 40px rgba(41, 107, 47, 0.2),
+                0 0 60px rgba(69, 146, 76, 0.1);
   }
-  33% {
-    box-shadow: 0 0 10px rgba(180, 100, 255, 0.5),
-                0 0 25px rgba(140, 80, 220, 0.35),
-                0 0 45px rgba(255, 120, 30, 0.2),
-                0 0 65px rgba(180, 100, 255, 0.1);
-  }
-  66% {
-    box-shadow: 0 0 12px rgba(255, 140, 50, 0.6),
-                0 0 28px rgba(255, 100, 20, 0.35),
-                0 0 50px rgba(180, 100, 255, 0.25),
-                0 0 70px rgba(255, 140, 50, 0.15);
+  50% {
+    box-shadow: 0 0 12px rgba(69, 146, 76, 0.7),
+                0 0 28px rgba(69, 146, 76, 0.45),
+                0 0 50px rgba(41, 107, 47, 0.3),
+                0 0 70px rgba(69, 146, 76, 0.15);
   }
 }
 
@@ -32,39 +26,32 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Дождь — падение капель */
-@keyframes rain-fall {
-  0% { background-position: 0 -100vh; }
-  100% { background-position: 0 100vh; }
-}
-
-/* Второй слой дождя (другой угол) */
-@keyframes rain-fall-2 {
-  0% { background-position: 0 -100vh; }
-  100% { background-position: -50px 100vh; }
+/* Дождь — капли падают вниз */
+@keyframes rain-drop {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
 }
 
 
 /* ===========================================
-   1. АВАТАР — яркий неон + оборот при ховере
+   1. АВАТАР — зелёный неон + оборот
    =========================================== */
 
 .p-profiles .profile-head .c-brief .avatar img {
   animation: avatar-neon 3s ease-in-out infinite !important;
   border-radius: 50% !important;
-  border: 2px solid rgba(255, 165, 50, 0.4) !important;
+  border: 2px solid rgba(69, 146, 76, 0.4) !important;
   transition: transform 0.6s ease !important;
 }
 
 .p-profiles .profile-head .c-brief .avatar img:hover {
   animation: avatar-spin 0.8s ease-in-out forwards, avatar-neon 3s ease-in-out infinite !important;
-  border-color: rgba(255, 165, 50, 0.8) !important;
+  border-color: rgba(69, 146, 76, 0.8) !important;
 }
 
 
 /* ===========================================
-   2. ДОЖДЬ — лёгкие капли поверх фона
-   Используем body::before (фон на ::after)
+   2. ДОЖДЬ — тонкие капли на фоне
    =========================================== */
 
 body::before {
@@ -72,28 +59,12 @@ body::before {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
+  width: 100% !important;
+  height: 200% !important;
   pointer-events: none !important;
   z-index: 0 !important;
-  opacity: 0.3 !important;
   background-image:
-    /* Тонкие вертикальные капли — слой 1 */
-    repeating-linear-gradient(
-      178deg,
-      transparent,
-      transparent 97%,
-      rgba(180, 200, 255, 0.15) 97%,
-      rgba(180, 200, 255, 0.15) 100%
-    ),
-    /* Слой 2 — другой ритм */
-    repeating-linear-gradient(
-      176deg,
-      transparent,
-      transparent 98.5%,
-      rgba(160, 180, 240, 0.1) 98.5%,
-      rgba(160, 180, 240, 0.1) 100%
-    ) !important;
-  background-size: 4px 120px, 7px 180px !important;
-  animation: rain-fall 1.2s linear infinite !important;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='400'%3E%3Cline x1='10' y1='0' x2='8' y2='30' stroke='rgba(180,200,255,0.15)' stroke-width='1'/%3E%3Cline x1='35' y1='60' x2='33' y2='95' stroke='rgba(160,190,255,0.1)' stroke-width='0.8'/%3E%3Cline x1='55' y1='20' x2='53' y2='55' stroke='rgba(180,200,255,0.12)' stroke-width='0.8'/%3E%3Cline x1='78' y1='100' x2='76' y2='130' stroke='rgba(170,195,255,0.1)' stroke-width='0.7'/%3E%3Cline x1='20' y1='150' x2='18' y2='185' stroke='rgba(180,200,255,0.13)' stroke-width='0.9'/%3E%3Cline x1='65' y1='200' x2='63' y2='230' stroke='rgba(160,185,255,0.1)' stroke-width='0.7'/%3E%3Cline x1='42' y1='280' x2='40' y2='315' stroke='rgba(180,200,255,0.11)' stroke-width='0.8'/%3E%3Cline x1='88' y1='320' x2='86' y2='350' stroke='rgba(170,195,255,0.12)' stroke-width='0.8'/%3E%3C/svg%3E") !important;
+  background-repeat: repeat !important;
+  animation: rain-drop 1.5s linear infinite !important;
 }
