@@ -47,3 +47,31 @@
   transform: rotate(360deg) !important;
   transition: transform 0.8s ease-in-out !important;
 }
+
+
+/* ===========================================
+   2. ДОЖДЬ на фоне (html::after — свободен)
+   =========================================== */
+
+@keyframes rain-fall {
+  0%   { background-position: 0 0; }
+  100% { background-position: 20px 800px; }
+}
+
+html::after {
+  content: '' !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  opacity: 0.4 !important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='800'%3E%3Cline x1='12' y1='0' x2='10' y2='50' stroke='rgba(180,210,255,0.15)' stroke-width='0.8' stroke-linecap='round'/%3E%3Cline x1='40' y1='120' x2='38' y2='170' stroke='rgba(170,200,250,0.1)' stroke-width='0.6' stroke-linecap='round'/%3E%3Cline x1='70' y1='50' x2='68' y2='100' stroke='rgba(180,210,255,0.12)' stroke-width='0.7' stroke-linecap='round'/%3E%3Cline x1='95' y1='220' x2='93' y2='265' stroke='rgba(170,200,250,0.1)' stroke-width='0.6' stroke-linecap='round'/%3E%3Cline x1='25' y1='320' x2='23' y2='370' stroke='rgba(180,210,255,0.13)' stroke-width='0.7' stroke-linecap='round'/%3E%3Cline x1='55' y1='420' x2='53' y2='465' stroke='rgba(170,200,250,0.09)' stroke-width='0.6' stroke-linecap='round'/%3E%3Cline x1='108' y1='530' x2='106' y2='575' stroke='rgba(180,210,255,0.11)' stroke-width='0.7' stroke-linecap='round'/%3E%3Cline x1='80' y1='650' x2='78' y2='700' stroke='rgba(170,200,250,0.1)' stroke-width='0.6' stroke-linecap='round'/%3E%3Cline x1='15' y1='720' x2='13' y2='770' stroke='rgba(180,210,255,0.12)' stroke-width='0.7' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: repeat !important;
+  background-size: 120px 800px !important;
+  animation: rain-fall 3s linear infinite !important;
+}
+
