@@ -1,0 +1,157 @@
+/* ============================================
+   ANIMATIONS - Custom Animations by Albion
+   ============================================ */
+
+/* --- Keyframes --- */
+
+/* Зелёный неон */
+@keyframes avatar-neon {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(69, 146, 76, 0.5),
+                0 0 20px rgba(69, 146, 76, 0.3),
+                0 0 40px rgba(41, 107, 47, 0.2),
+                0 0 60px rgba(69, 146, 76, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(69, 146, 76, 0.7),
+                0 0 28px rgba(69, 146, 76, 0.45),
+                0 0 50px rgba(41, 107, 47, 0.3),
+                0 0 70px rgba(69, 146, 76, 0.15);
+  }
+}
+
+/* Авто-вращение: стоит → по часовой → стоит → против часовой */
+@keyframes avatar-auto-spin {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(0deg); }
+  25%  { transform: rotate(360deg); }
+  50%  { transform: rotate(360deg); }
+  55%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Блеск — луч света */
+@keyframes avatar-shine {
+  0%   { transform: translateX(-200%) rotate(25deg); }
+  15%  { transform: translateX(200%) rotate(25deg); }
+  100% { transform: translateX(200%) rotate(25deg); }
+}
+
+/* Дождь */
+@keyframes rain-fall {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+
+/* ===========================================
+   1. АВАТАР (главная)
+   - Зелёный неон
+   - Авто-вращение + ховер вращение
+   - Блеск
+   =========================================== */
+
+.p-profiles .profile-head .c-brief .avatar {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 50% !important;
+}
+
+.p-profiles .profile-head .c-brief .avatar img {
+  animation: avatar-neon 3s ease-in-out infinite, avatar-auto-spin 20s ease-in-out infinite !important;
+  border-radius: 50% !important;
+  border: 2px solid rgba(69, 146, 76, 0.4) !important;
+}
+
+/* Ховер — быстрое вращение поверх */
+.p-profiles .profile-head .c-brief .avatar:hover img {
+  animation: avatar-neon 3s ease-in-out infinite !important;
+  transform: rotate(360deg) !important;
+  transition: transform 0.8s ease-in-out !important;
+}
+
+/* Блеск — луч света через аватар */
+.p-profiles .profile-head .c-brief .avatar::after {
+  content: '' !important;
+  position: absolute !important;
+  top: -10% !important;
+  left: 0 !important;
+  width: 40% !important;
+  height: 120% !important;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.2) 45%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.2) 55%,
+    rgba(255, 255, 255, 0.05) 80%,
+    transparent 100%
+  ) !important;
+  animation: avatar-shine 5s ease-in-out infinite !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+}
+
+
+/* ===========================================
+   2. Аватарка в меню (правый верхний угол)
+   — Зелёный неон, как на главной
+   =========================================== */
+
+.l-top_menu-v2 .menu-dropdown.profile .submenu-triangle img {
+  animation: avatar-neon 3s ease-in-out infinite !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.l-top_menu-v2 .menu-dropdown.profile .submenu-triangle:hover img {
+  box-shadow: 0 0 12px rgba(69, 146, 76, 0.7),
+              0 0 28px rgba(69, 146, 76, 0.45),
+              0 0 50px rgba(41, 107, 47, 0.3) !important;
+}
+
+
+/* ===========================================
+   3. ДРУЗЬЯ И КЛУБЫ — одинаковый размер
+   =========================================== */
+
+/* Друзья — одинаковые аватарки */
+.p-profiles-show .cc-friends .b-user img {
+  width: 38px !important;
+  height: 38px !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+}
+
+/* Клубы — одинаковые иконки */
+body#profiles_show .b-clubs .b-club img {
+  width: 48px !important;
+  height: 48px !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+}
+
+
+/* ===========================================
+   4. ДОЖДЬ
+   Ставим на #profiles_show::after
+   (body::before занят шаблоном,
+    .l-page::after не работает)
+   =========================================== */
+
+#profiles_show::after {
+  content: '' !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='500'%3E%3Cline x1='10' y1='0' x2='8' y2='40' stroke='rgba(180,210,255,0.13)' stroke-width='0.8' stroke-linecap='round'/%3E%3Cline x1='30' y1='100' x2='28' y2='145' stroke='rgba(170,200,250,0.09)' stroke-width='0.6' stroke-linecap='round'/%3E%3Cline x1='55' y1='40' x2='53' y2='80' stroke='rgba(180,210,255,0.11)' stroke-width='0.7' stroke-linecap='round'/%3E%3Cline x1='75' y1='180' x2='73' y2='215' stroke='rgba(170,200,250,0.1)' stroke-width='0.6' stroke-linecap='round'/%3E%3Cline x1='18' y1='250' x2='16' y2='290' stroke='rgba(180,210,255,0.12)' stroke-width='0.7' stroke-linecap='round'/%3E%3Cline x1='45' y1='320' x2='43' y2='360' stroke='rgba(170,200,250,0.09)' stroke-width='0.6' stroke-linecap='round'/%3E%3Cline x1='88' y1='400' x2='86' y2='440' stroke='rgba(180,210,255,0.11)' stroke-width='0.7' stroke-linecap='round'/%3E%3Cline x1='65' y1='460' x2='63' y2='495' stroke='rgba(170,200,250,0.1)' stroke-width='0.6' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: repeat !important;
+  background-size: 100px 500px !important;
+  animation: rain-fall 2s linear infinite !important;
+}
