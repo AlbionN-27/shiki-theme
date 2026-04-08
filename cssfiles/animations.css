@@ -1,58 +1,42 @@
 /* ============================================
    ANIMATIONS - Custom Animations by Albion
-   Поэлементная настройка
    ============================================ */
 
-/* --- Keyframes для аватара --- */
+/* --- Keyframes --- */
 
-/* Плавное покачивание влево-вправо */
-@keyframes avatar-swing {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(3deg); }
-  75% { transform: rotate(-3deg); }
+/* Пульсирующее свечение */
+@keyframes avatar-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(118, 133, 245, 0.5),
+                0 0 25px rgba(71, 49, 156, 0.3),
+                0 0 40px rgba(118, 133, 245, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(210, 137, 45, 0.6),
+                0 0 35px rgba(210, 137, 45, 0.3),
+                0 0 50px rgba(118, 133, 245, 0.2);
+  }
 }
 
-/* Полный оборот при ховере */
+/* Плавный оборот на 360° */
 @keyframes avatar-spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* Переливающаяся рамка */
-@keyframes border-glow {
-  0% { box-shadow: 0 0 8px rgba(118, 133, 245, 0.4), 0 0 20px rgba(71, 49, 156, 0.15); }
-  33% { box-shadow: 0 0 12px rgba(210, 137, 45, 0.5), 0 0 25px rgba(210, 137, 45, 0.15); }
-  66% { box-shadow: 0 0 12px rgba(71, 49, 156, 0.5), 0 0 25px rgba(118, 133, 245, 0.15); }
-  100% { box-shadow: 0 0 8px rgba(118, 133, 245, 0.4), 0 0 20px rgba(71, 49, 156, 0.15); }
-}
-
-/* Мерцание рамки */
-@keyframes border-color-shift {
-  0% { border-color: rgba(118, 133, 245, 0.6); }
-  33% { border-color: rgba(210, 137, 45, 0.6); }
-  66% { border-color: rgba(71, 49, 156, 0.6); }
-  100% { border-color: rgba(118, 133, 245, 0.6); }
-}
-
 
 /* ===========================================
-   АВАТАР
-   - Размер НЕ меняется
-   - Плавное покачивание в покое
-   - Переливающееся свечение вокруг
-   - Полный оборот при наведении мышки
+   АВАТАР — пульсирующее свечение вокруг
+   При наведении — оборот на 360°
+   Размер НЕ меняется
    =========================================== */
 
-/* Само изображение аватара */
 .p-profiles .profile-head .c-brief .avatar img {
-  animation: avatar-swing 6s ease-in-out infinite, border-glow 5s ease-in-out infinite;
-  border: 2px solid rgba(118, 133, 245, 0.5);
-  border-radius: 50%;
-  transition: all 0.6s ease;
+  animation: avatar-glow 3s ease-in-out infinite !important;
+  border-radius: 50% !important;
+  transition: transform 0.6s ease !important;
 }
 
-/* При наведении — плавный оборот на 360° */
 .p-profiles .profile-head .c-brief .avatar img:hover {
-  animation: avatar-spin 0.8s ease-in-out, border-glow 5s ease-in-out infinite;
-  border-color: rgba(210, 137, 45, 0.8);
+  animation: avatar-spin 0.8s ease-in-out forwards, avatar-glow 3s ease-in-out infinite !important;
 }
