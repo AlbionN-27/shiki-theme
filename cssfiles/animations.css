@@ -1,363 +1,58 @@
 /* ============================================
    ANIMATIONS - Custom Animations by Albion
-   Shikimori Profile Theme Enhancements
+   Поэлементная настройка
    ============================================ */
 
-/* --- Keyframes --- */
+/* --- Keyframes для аватара --- */
 
-/* Плавное дыхание / пульсация */
-@keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+/* Плавное покачивание влево-вправо */
+@keyframes avatar-swing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
 }
 
-/* Свечение */
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(118, 133, 245, 0.3), 0 0 20px rgba(71, 49, 156, 0.2); }
-  50% { box-shadow: 0 0 15px rgba(118, 133, 245, 0.6), 0 0 35px rgba(71, 49, 156, 0.4); }
+/* Полный оборот при ховере */
+@keyframes avatar-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-/* Мерцание текста (шиммер) */
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+/* Переливающаяся рамка */
+@keyframes border-glow {
+  0% { box-shadow: 0 0 8px rgba(118, 133, 245, 0.4), 0 0 20px rgba(71, 49, 156, 0.15); }
+  33% { box-shadow: 0 0 12px rgba(210, 137, 45, 0.5), 0 0 25px rgba(210, 137, 45, 0.15); }
+  66% { box-shadow: 0 0 12px rgba(71, 49, 156, 0.5), 0 0 25px rgba(118, 133, 245, 0.15); }
+  100% { box-shadow: 0 0 8px rgba(118, 133, 245, 0.4), 0 0 20px rgba(71, 49, 156, 0.15); }
 }
 
-/* Плавное появление снизу */
-@keyframes fade-slide-in {
-  0% { opacity: 0; transform: translateY(8px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Лёгкое покачивание */
-@keyframes gentle-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-/* Пульсация иконок */
-@keyframes icon-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.9; }
-}
-
-/* Анимированная рамка */
-@keyframes border-glow-rotate {
-  0% { border-color: rgba(118, 133, 245, 0.5); }
-  33% { border-color: rgba(71, 49, 156, 0.7); }
-  66% { border-color: rgba(210, 137, 45, 0.5); }
-  100% { border-color: rgba(118, 133, 245, 0.5); }
-}
-
-/* Свечение для достижений */
-@keyframes achievement-shine {
-  0% { box-shadow: 0 0 5px rgba(118, 133, 245, 0.2); }
-  50% { box-shadow: 0 0 15px rgba(118, 133, 245, 0.5), 0 0 30px rgba(71, 49, 156, 0.2); }
-  100% { box-shadow: 0 0 5px rgba(118, 133, 245, 0.2); }
+/* Мерцание рамки */
+@keyframes border-color-shift {
+  0% { border-color: rgba(118, 133, 245, 0.6); }
+  33% { border-color: rgba(210, 137, 45, 0.6); }
+  66% { border-color: rgba(71, 49, 156, 0.6); }
+  100% { border-color: rgba(118, 133, 245, 0.6); }
 }
 
 
 /* ===========================================
-   1. АВАТАР: свечение + дыхание
+   АВАТАР
+   - Размер НЕ меняется
+   - Плавное покачивание в покое
+   - Переливающееся свечение вокруг
+   - Полный оборот при наведении мышки
    =========================================== */
+
+/* Само изображение аватара */
 .p-profiles .profile-head .c-brief .avatar img {
-  animation: glow-pulse 4s ease-in-out infinite, breathe 6s ease-in-out infinite;
+  animation: avatar-swing 6s ease-in-out infinite, border-glow 5s ease-in-out infinite;
+  border: 2px solid rgba(118, 133, 245, 0.5);
   border-radius: 50%;
-  transition: all 0.4s ease;
+  transition: all 0.6s ease;
 }
 
+/* При наведении — плавный оборот на 360° */
 .p-profiles .profile-head .c-brief .avatar img:hover {
-  animation: none;
-  transform: scale(1.08) rotate(2deg);
-  box-shadow: 0 0 25px rgba(118, 133, 245, 0.7), 0 0 50px rgba(71, 49, 156, 0.4);
-  border-color: rgba(210, 137, 45, 0.8) !important;
-}
-
-/* Контейнер аватара */
-.p-profiles .profile-head .c-brief .avatar {
-  position: relative;
-}
-
-/* Анимированная рамка вокруг аватара */
-.p-profiles .profile-head .c-brief .avatar::after {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  border: 2px solid rgba(118, 133, 245, 0.4);
-  border-radius: 50%;
-  animation: border-glow-rotate 5s linear infinite;
-  pointer-events: none;
-}
-
-
-/* ===========================================
-   2. НИКНЕЙМ: шиммер-эффект (переливание)
-   =========================================== */
-* .c-brief header.head h1 {
-  background: linear-gradient(
-    90deg,
-    rgba(198, 203, 241, 1) 0%,
-    rgba(210, 137, 45, 0.9) 25%,
-    rgba(118, 133, 245, 1) 50%,
-    rgba(210, 137, 45, 0.9) 75%,
-    rgba(198, 203, 241, 1) 100%
-  ) !important;
-  background-size: 200% auto !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  animation: shimmer 4s linear infinite !important;
-}
-
-/* Ускорение при наведении */
-* .c-brief header.head h1:hover {
-  animation-duration: 1.5s !important;
-  filter: brightness(1.2);
-}
-
-
-/* ===========================================
-   3. ИЗБРАННОЕ: каскадное появление + ховер
-   =========================================== */
-.p-profiles-show .profile-content .b-catalog_entry {
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: fade-slide-in 0.6s ease-out both;
-}
-
-/* Каскадная задержка для первых 10 элементов */
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(1) { animation-delay: 0.05s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(2) { animation-delay: 0.1s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(3) { animation-delay: 0.15s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(4) { animation-delay: 0.2s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(5) { animation-delay: 0.25s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(6) { animation-delay: 0.3s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(7) { animation-delay: 0.35s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(8) { animation-delay: 0.4s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(9) { animation-delay: 0.45s; }
-.p-profiles-show .profile-content .b-catalog_entry:nth-child(10) { animation-delay: 0.5s; }
-
-/* Ховер: увеличение + свечение */
-.p-profiles-show .profile-content .b-catalog_entry:hover {
-  transform: scale(1.08) translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(118, 133, 245, 0.3);
-  z-index: 5;
-}
-
-.p-profiles-show .profile-content .b-catalog_entry:hover img {
-  filter: brightness(1.1) saturate(1.2);
-}
-
-
-/* ===========================================
-   4. ДРУЗЬЯ: плавное покачивание
-   =========================================== */
-.p-profiles-show .cc-friends .b-user {
-  transition: all 0.3s ease;
-  animation: gentle-float 4s ease-in-out infinite;
-}
-
-/* Разные задержки чтобы друзья "плавали" не синхронно */
-.p-profiles-show .cc-friends .b-user:nth-child(1) { animation-delay: 0s; }
-.p-profiles-show .cc-friends .b-user:nth-child(2) { animation-delay: 0.5s; }
-.p-profiles-show .cc-friends .b-user:nth-child(3) { animation-delay: 1s; }
-.p-profiles-show .cc-friends .b-user:nth-child(4) { animation-delay: 1.5s; }
-.p-profiles-show .cc-friends .b-user:nth-child(5) { animation-delay: 2s; }
-.p-profiles-show .cc-friends .b-user:nth-child(6) { animation-delay: 2.5s; }
-.p-profiles-show .cc-friends .b-user:nth-child(7) { animation-delay: 3s; }
-.p-profiles-show .cc-friends .b-user:nth-child(8) { animation-delay: 3.5s; }
-
-/* Ховер на друзей */
-.p-profiles-show .cc-friends .b-user:hover {
-  transform: scale(1.15) translateY(-5px) !important;
-  animation: none;
-}
-
-.p-profiles-show .cc-friends .b-user:hover img {
-  box-shadow: 0 0 15px rgba(210, 137, 45, 0.6), 0 4px 15px rgba(0, 0, 0, 0.3);
-  border-color: rgba(210, 137, 45, 0.7) !important;
-}
-
-.p-profiles-show .cc-friends .b-user img {
-  transition: all 0.3s ease;
-}
-
-
-/* ===========================================
-   5. КЛУБЫ: пульсация иконок
-   =========================================== */
-.b-clubs .b-club {
-  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: icon-pulse 5s ease-in-out infinite;
-}
-
-.b-clubs .b-club:nth-child(odd) { animation-delay: 0.3s; }
-.b-clubs .b-club:nth-child(even) { animation-delay: 1.2s; }
-
-.b-clubs .b-club:hover {
-  transform: scale(1.12) translateY(-3px);
-  animation: none;
-}
-
-.b-clubs .b-club:hover img {
-  box-shadow: 0 0 12px rgba(118, 133, 245, 0.5), 0 4px 15px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.15);
-}
-
-.b-clubs .b-club img {
-  transition: all 0.3s ease;
-}
-
-
-/* ===========================================
-   6. ДОСТИЖЕНИЯ: свечение + ховер
-   =========================================== */
-body#profiles_show .b-achievement.badge {
-  animation: achievement-shine 5s ease-in-out infinite;
-  transition: all 0.35s ease;
-}
-
-body#profiles_show .b-achievement.badge:nth-child(odd) { animation-delay: 0.5s; }
-body#profiles_show .b-achievement.badge:nth-child(3n) { animation-delay: 1.5s; }
-
-body#profiles_show .b-achievement.badge:hover {
-  transform: scale(1.06) translateY(-3px);
-  box-shadow: 0 0 20px rgba(210, 137, 45, 0.5), 0 0 40px rgba(118, 133, 245, 0.3) !important;
-  animation: none;
-}
-
-/* Франшизы */
-body#profiles_show .cc-franchises .b-badge {
-  transition: all 0.3s ease;
-}
-
-body#profiles_show .cc-franchises .b-badge:hover {
-  transform: scale(1.1) translateY(-3px);
-  box-shadow: 0 0 15px rgba(118, 133, 245, 0.4);
-}
-
-body#profiles_show .cc-franchises .b-badge img {
-  transition: all 0.3s ease;
-}
-
-body#profiles_show .cc-franchises .b-badge:hover img {
-  filter: brightness(1.15) saturate(1.1);
-}
-
-
-/* ===========================================
-   7. ИСТОРИЯ: убран бегущий текст + анимации
-   =========================================== */
-
-/* Убираем бегущий текст (runningtext) */
-.p-profiles .profile-head .c-history .entry .title {
-  animation: none !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-/* Плавное появление записей */
-.p-profiles .profile-head .c-history .entry {
-  transition: all 0.3s ease;
-  animation: fade-slide-in 0.5s ease-out both;
-  border-radius: 8px;
-  padding: 3px 5px;
-}
-
-.p-profiles .profile-head .c-history .entry:nth-child(1) { animation-delay: 0.1s; }
-.p-profiles .profile-head .c-history .entry:nth-child(2) { animation-delay: 0.25s; }
-.p-profiles .profile-head .c-history .entry:nth-child(3) { animation-delay: 0.4s; }
-.p-profiles .profile-head .c-history .entry:nth-child(4) { animation-delay: 0.55s; }
-
-/* Ховер на запись истории */
-.p-profiles .profile-head .c-history .entry:hover {
-  background: rgba(118, 133, 245, 0.1);
-  box-shadow: 0 0 12px rgba(118, 133, 245, 0.15), inset 0 0 20px rgba(71, 49, 156, 0.05);
-  transform: translateX(3px);
-}
-
-.p-profiles .profile-head .c-history .entry:hover .title {
-  color: rgba(210, 137, 45, 1) !important;
-}
-
-/* Иконка в истории */
-.p-profiles .profile-head .c-history .entry .image {
-  transition: all 0.3s ease;
-}
-
-.p-profiles .profile-head .c-history .entry:hover .image {
-  transform: scale(1.08);
-  box-shadow: 0 0 10px rgba(118, 133, 245, 0.3);
-  border-radius: 4px;
-}
-
-/* Дата в истории */
-.p-profiles .profile-head .c-history .entry .misc.date {
-  transition: all 0.3s ease;
-}
-
-.p-profiles .profile-head .c-history .entry:hover .misc.date {
-  color: rgba(164, 172, 229, 1) !important;
-}
-
-/* Текст действия в истории */
-.p-profiles .profile-head .c-history .entry .misc {
-  transition: all 0.3s ease;
-}
-
-.p-profiles .profile-head .c-history .entry:hover .misc {
-  color: rgba(164, 172, 229, 1) !important;
-}
-
-
-/* ===========================================
-   8. КНОПКИ ПРОФИЛЯ (почта, настройки, инфо)
-   =========================================== */
-.p-profiles .profile-head .c-brief .avatar .profile-actions a {
-  transition: all 0.3s ease;
-}
-
-.p-profiles .profile-head .c-brief .avatar .profile-actions a:hover {
-  transform: scale(1.2) translateY(-2px);
-  color: rgba(210, 137, 45, 1) !important;
-}
-
-
-/* ===========================================
-   9. ПРОГРЕСС-БАР (шкала аниме/манга)
-   =========================================== */
-.p-profiles .profile-head .c-info .c-lists-info .b-stats_bar {
-  transition: all 0.3s ease;
-}
-
-.p-profiles .profile-head .c-info .c-lists-info .b-stats_bar:hover {
-  transform: scaleY(1.15);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
-}
-
-
-/* ===========================================
-   10. БЛОКИ ПРОФИЛЯ: плавное появление
-   =========================================== */
-.p-profiles-show .profile-content .block {
-  animation: fade-slide-in 0.5s ease-out both;
-}
-
-.p-profiles-show .profile-content .block:nth-child(1) { animation-delay: 0.1s; }
-.p-profiles-show .profile-content .block:nth-child(2) { animation-delay: 0.2s; }
-.p-profiles-show .profile-content .block:nth-child(3) { animation-delay: 0.3s; }
-.p-profiles-show .profile-content .block:nth-child(4) { animation-delay: 0.4s; }
-.p-profiles-show .profile-content .block:nth-child(5) { animation-delay: 0.5s; }
-
-/* Заголовки блоков подсвечиваются при ховере */
-.p-profiles-show .profile-content .block header.head {
-  transition: all 0.3s ease;
-}
-
-.p-profiles-show .profile-content .block header.head:hover h2 {
-  color: rgba(210, 137, 45, 1) !important;
-  text-shadow: 0 0 15px rgba(210, 137, 45, 0.3);
+  animation: avatar-spin 0.8s ease-in-out, border-glow 5s ease-in-out infinite;
+  border-color: rgba(210, 137, 45, 0.8);
 }
