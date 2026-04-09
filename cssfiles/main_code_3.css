@@ -674,40 +674,70 @@ input.ac_input.ac_loading {
     color: rgba(var(--bright-color), 1);
 }
 
-.p-profiles-show .cc-friends {
-    display: inline-flex;
-    vertical-align: top;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    align-content: space-around;
+/* Умная сетка для Друзей и Клубов */
+.p-profiles-show .cc-friends,
+.b-clubs {
+    display: grid !important;
+    grid-template-columns: repeat(4, 48px) !important;
+    justify-content: space-between !important;
+    gap: 12px 0 !important;
     width: 100%;
+    margin-bottom: 30px !important; /* Увеличиваем отступ снизу, чтобы сдвинуть Избранное */
+}
+
+/* Форсируем отступ сверху у друзей, чтобы сравнять с клубами */
+body.p-profiles-show .l-page .profile-content .cc-friends {
+    padding-top: 10px !important;
 }
 
 .p-profiles-show .cc-friends .b-user,
-.p-profiles-show .cc-friends .b-user:last-child {
-    margin: auto 1% !important;
+.p-profiles-show .cc-friends .b-user:last-child,
+.b-clubs .b-club {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 48px !important;
+    height: 48px !important;
+    display: block !important;
+}
+
+.p-profiles-show .cc-friends .b-user img,
+.p-profiles-show .cc-friends .b-user .avatar,
+.b-clubs .b-club img,
+.b-clubs .b-club .avatar {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    border-radius: 50% !important;
+    margin: 0 !important;
+    display: block !important;
+    object-fit: cover !important;
+}
+
+/* Скрываем всё, начиная с 9-го элемента (оставляем только 2 ряда) */
+.p-profiles-show .cc-friends .b-user:nth-child(n+9),
+.b-clubs .b-club:nth-child(n+9) {
+    display: none !important;
+}
+
+/* Показываем при наведении на весь блок */
+.p-profiles-show .cc-friends:hover .b-user:nth-child(n+9),
+.b-clubs:hover .b-club:nth-child(n+9) {
+    display: block !important;
+}
+
+/* Эффект Кликабельности и Подсветки для Заголовка ДРУЗЬЯ (Как у Клубов) */
+.p-profiles-show .profile-content .cc-2a .block:first-child .subheadline {
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+.p-profiles-show .profile-content .cc-2a .block:first-child .subheadline:hover,
+.p-profiles-show .profile-content .cc-2a .block:first-child .subheadline a:hover {
+    color: #45924c !important; 
+    text-shadow: 0 0 8px rgba(69, 146, 76, 0.6) !important;
 }
 
 .activity .title {
     display: none;
-}
-
-.b-clubs {
-    display: inline-flex;
-    vertical-align: top;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    align-content: space-around;
-    top: 0px;
-    width: 100%;
-    min-height: 70px;
-    padding: 0px 0px 0px 0px;
-}
-
-.b-clubs .b-club {
-    margin: auto !important;
 }
 
 .p-profiles .profile-head .c-brief .avatar .profile-actions {
