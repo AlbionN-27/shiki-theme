@@ -97,14 +97,14 @@
    =========================================== */
 
 .l-top_menu-v2 .menu-dropdown.profile .submenu {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .l-top_menu-v2 .menu-dropdown.profile .submenu > a {
-  text-align: center !important;
-  justify-content: center !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
 }
 
 .l-top_menu-v2 .menu-dropdown.profile .submenu > .legend {
-  text-align: center !important;
+  text-align: left !important;
 }
